@@ -8,19 +8,6 @@ var callSigns = getColumn(url, 5);
 var mainHubs = getColumn(url, 6);
 var foundedYears = getColumn(url, 7);
 
-/*five functions; at least two of the following items
-Each function should include at least two of the following items, and all of the items must be used at least twice across your functions:
-Iteration
-Selection
-One or more parameters
-Return
-*/
-
-/*Each function should have detailed documentation, including
-description of what the function does
-description of the parameters, including the data type 
-what will be returned
-*/
 
 //Find all the Airline Names according to any main hub users input
 function getAirline(hub){
@@ -38,7 +25,7 @@ function getAirline(hub){
   }
 return matches; 
 }
-
+ // console.log(getAirline("wilmingtno"));
 
 //Find main hubs based on icao code as an input
 function getHub(icao){
@@ -49,14 +36,14 @@ function getHub(icao){
     }
   }
   if (matches.length == 0){
-      matches.push("Cannot find the airline at " + hub + ".");
+      matches.push("Cannot find main hub based on " + icao + ".");
     }
   else if (typeof icao!= "string"){
     return "Please enter a string parameter";
   }
 return matches; 
 }
-
+  console.log(getHub("Bxxxxx"));
 
 //Find the oldest airline based on airline type as an input
 function getOldest(type){
@@ -72,19 +59,22 @@ function getOldest(type){
   }
  return oldestAirline; 
 }
-
+//console.log(getOldest("Charter"));
 
 //Find type of Airline based on callsign 
 function getAirlinetype(cs){
-  var type;
+  var type=0;
   for (var i in callSigns){
     if (callSigns[i].toLowerCase().includes(cs.toLowerCase())){
       type=airlineTypes[i];
     }
+    if (type == 0){
+      return ("Cannot find Airline type based on " + cs + ".");
   }
   return type;
 }
-console.log(getAirlinetype("bemidji"));
+}
+console.log(getAirlinetype("AAAAAAA"));
 
 //Find all airlines founded in a certain year
 function getAirline2(fy){
@@ -93,9 +83,16 @@ function getAirline2(fy){
     if (parseFloat(foundedYears[i])==fy){
       matches.push(airlineNames[i]);
     }
+    if (matches.length==0){
+      return ("Cannot find airlines in "+fy);
+    }
   }
 return matches;
 }
+
+console.log(getAirline2("2029"))
+
+
 
 
 
